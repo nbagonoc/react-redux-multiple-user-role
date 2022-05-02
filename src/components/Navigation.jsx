@@ -9,7 +9,7 @@ const Navigation = () => {
   const { user } = useSelector((state) => state.auth)
 
   const onLogout = (e) =>{
-    e.preventDeault()
+    e.preventDefault()
     dispatch(logout())
     dispatch(reset())
     navigate('/')
@@ -21,16 +21,16 @@ const Navigation = () => {
       <button className='navbar-toggler' type='button' data-toggle='collapse' data-target='#navbarNavAltMarkup' aria-controls='navbarNavAltMarkup' aria-expanded='false' aria-label='Toggle navigation'>
         <span className='navbar-toggler-icon'></span>
       </button>
-      <div className='collapse navbar-collapse' id='navbarNavAltMarkup'>
+      <div className='justify-content-end collapse navbar-collapse' id='navbarNavAltMarkup'>
         <div className='navbar-nav'>
           {user ? (
             <>
               <Link className='nav-item nav-link' to='/dashboard'>
                 <FaUser /> Dashboard
               </Link>
-              <Link className='btn btn-primary' onClick={onLogout}>
+              <button className='btn btn-primary' onClick={onLogout}>
                 <FaSignOutAlt /> Logout
-              </Link>
+              </button>
             </>
           ) : (
             <>

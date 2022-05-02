@@ -32,7 +32,7 @@ const Login = () => {
   }
 
   const onSubmit = (e) => {
-    e.preventDeault()
+    e.preventDefault()
 
     const userData = {
       email,
