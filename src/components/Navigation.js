@@ -1,5 +1,6 @@
-import { Link } from 'react-router-dom';
-import { Navbar, Nav, NavItem } from 'reactstrap';
+import { Link } from 'react-router-dom'
+import { Navbar, Nav, NavItem } from 'reactstrap'
+import { FaSignInAlt, FaSignOutAlt, FaUser } from 'react-icons/fa'
 
 const Navigation = () => {
   return (
@@ -7,7 +8,15 @@ const Navigation = () => {
       <Link className='navbar-brand' to='/'>RRMU</Link>
       <Nav>
         <NavItem>
-          <Link className='btn btn-primary' to='/login'>Login</Link>
+          <Link className='' to='/login'>
+            <FaSignInAlt/> Login
+          </Link>
+          <Link className='' to='/register'>
+            <FaUser/> Register
+          </Link>
+          <Link className='btn btn-primary' to='/dashboard'>
+            <FaUser/> Profile
+          </Link>
         </NavItem>
       </Nav>
     </Navbar>
