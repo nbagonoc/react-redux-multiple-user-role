@@ -21,7 +21,7 @@ export const authSlice = createSlice({
             state.message = ''
         }
     },
-    extraReducers: () => {}
+    extraReducers: () => { }
 })
-export const {reset} = authSlice.actions
+export const { reset } = authSlice.actions
 export default authSlice.reducer
