@@ -5,8 +5,8 @@ import { API } from './authPath'
 
 const register = async (userData) => {
     const response = await axios.post(API+'/register', userData)
-    if (response.data) localStorage.setItem('user', JSON.stringify(response.data.token))
-    return response.data
+    if (response.data.success === false) throw new Error(response.data.message)
+    return response.data.message
 }
 
 const login = async (userData) => {
