@@ -1,12 +1,6 @@
-
 import axios from "axios"
 import { API } from './authPath'
-import jwt_decode from 'jwt-decode'
-const token = JSON.parse(localStorage.getItem('user'))
-
-const authAxios = axios.create({
-    headers: { Authorization: token }
-})
+import authenticator from '../../utils/authenticator.js'
 
 const register = async (userData) => {
     const response = await axios.post(`${API}/register`, userData)
@@ -17,18 +11,17 @@ const register = async (userData) => {
 const login = async (userData) => {
     const response = await axios.post(`${API}/login`, userData)
     if (response.data.success === true) {
-        localStorage.setItem('user', JSON.stringify(response.data.token))
-        const payload = jwt_decode(response.data.token)
-        return { name: payload.name, role: payload.role, token: response.data.token }
+        authenticator.setStorage(response.data.token)
+        return authenticator.setUser()
     } else throw new Error(response.data.message)
 }
 
 const logout = async () => {
-    localStorage.removeItem('user')
+    authenticator.unSetStorage()
 }
 
 const test = async () => {
-    const response = await authAxios.get(`${API}/test`)
+    const response = await authenticator.setAuthorization().get(`${API}/test`)
     return response.data
 }
 
