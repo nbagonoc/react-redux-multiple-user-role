@@ -22,7 +22,7 @@ const logout = async () => {
 
 const test = async () => {
     const response = await authenticator.setAuthorization().get(`${API}/test`)
-    return response.data
+    return response
 }
 
 const authService = { register, logout, login, test }

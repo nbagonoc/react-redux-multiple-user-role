@@ -32,12 +32,11 @@ export const logout = createAsyncThunk('auth/logout', async () => {
     await authService.logout()
 })
 
-export const test = createAsyncThunk('auth/test', async (thunkAPI) => {
+export const test = createAsyncThunk('auth/test', async () => {
     try {
         return await authService.test()
     } catch (error) {
-        const message = error.message
-        return thunkAPI.rejectWithValue(message)
+        // do something to backend to properly show test error
     }
 
 })
