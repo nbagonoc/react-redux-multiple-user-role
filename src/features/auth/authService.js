@@ -11,9 +11,10 @@ const register = async (userData) => {
 
 const login = async (userData) => {
     const response = await axios.post(API+'/login', userData)
-    if (response.data) localStorage.setItem('user', JSON.stringify(response.data.token))
-    // console.log(jwt_decode(response.data.token)) //very important
-    return response.data
+    if (response.data.success === true) {
+        localStorage.setItem('user', JSON.stringify(response.data.token))
+        return response.data
+    } else throw new Error(response.data.message)
 }
 
 const logout = async () => {
