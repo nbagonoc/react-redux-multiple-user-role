@@ -1,9 +1,12 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import authService from './authService'
-const user = JSON.parse(localStorage.getItem('user'))
+import jwt_decode from 'jwt-decode'
+const lStorage = JSON.parse(localStorage.getItem('user'))
+const payload = lStorage ? jwt_decode(JSON.parse(localStorage.getItem('user'))) : null
+const user = payload !== null ? { name: payload.name, role: payload.role, token: lStorage } : null
 
 const initialState = {
-    user: user ? user : null,
+    user: lStorage ? user : null,
     isLoading: false,
     isError: false,
     isSuccess: false,
@@ -41,7 +44,6 @@ export const test = createAsyncThunk('auth/test', async (thunkAPI) => {
     }
 
 })
-
 
 export const authSlice = createSlice({
     name: 'auth',
