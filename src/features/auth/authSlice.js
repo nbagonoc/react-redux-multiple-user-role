@@ -1,39 +1,45 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import authService from './authService'
-// get user from localstorage
 const user = JSON.parse(localStorage.getItem('user'))
 
 const initialState = {
     user: user ? user : null,
+    isLoading: false,
     isError: false,
     isSuccess: false,
-    isLoading: false,
     message: ''
 }
 
-// Register user
-export const register = createAsyncThunk('auth/register', async (user, thunkAPI) => {
+export const register = createAsyncThunk('auth/register', async (data, thunkAPI) => {
     try {
-        return await authService.register(user)
+        return await authService.register(data)
     } catch (error) {
         const message = error.message
         return thunkAPI.rejectWithValue(message)
     }
 })
 
-// Login user
-export const login = createAsyncThunk('auth/login', async (user, thunkAPI) => {
+export const login = createAsyncThunk('auth/login', async (data, thunkAPI) => {
     try {
-        return await authService.login(user)
+        return await authService.login(data)
     } catch (error) {
-        const message = (error.response && error.response.data && error.response.data.message) || error.message || error.toString()
+        const message = error.message
         return thunkAPI.rejectWithValue(message)
     }
 })
 
-// Logout user
 export const logout = createAsyncThunk('auth/logout', async () => {
     await authService.logout()
+})
+
+export const test = createAsyncThunk('auth/test', async (thunkAPI) => {
+    try {
+        return await authService.test()
+    } catch (error) {
+        const message = error.message
+        return thunkAPI.rejectWithValue(message)
+    }
+
 })
 
 

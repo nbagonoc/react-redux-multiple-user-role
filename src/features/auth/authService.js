@@ -1,7 +1,12 @@
 
-import axios from "axios";
+import axios from "axios"
 import { API } from './authPath'
 import jwt_decode from 'jwt-decode'
+const token = JSON.parse(localStorage.getItem('user'))
+
+const authAxios = axios.create({
+    headers: { Authorization: token }
+})
 
 const register = async (userData) => {
     const response = await axios.post(`${API}/register`, userData)
@@ -22,6 +27,11 @@ const logout = async () => {
     localStorage.removeItem('user')
 }
 
-const authService = { register, logout, login }
+const test = async () => {
+    const response = await authAxios.get(`${API}/test`)
+    return response.data
+}
+
+const authService = { register, logout, login, test }
 
 export default authService

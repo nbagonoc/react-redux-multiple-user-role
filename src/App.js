@@ -4,6 +4,7 @@ import Navigation from './components/Navigation'
 import Home from './pages/Home'
 import Dashboard from './pages/Dashboard'
 import Godmode from './pages/Godmode'
+import Test from './pages/Test'
 import Login from './pages/Login'
 import Register from './pages/Register'
 import 'bootstrap/dist/css/bootstrap.min.css'
@@ -22,6 +23,7 @@ function App() {
             <Route path='/godmode' element={<Godmode />} />
             <Route path='/register' element={<Register />} />
             <Route path='/login' element={<Login />} />
+            <Route path='/test' element={<Test />} />
           </Routes>
         </div>
       </Router>
