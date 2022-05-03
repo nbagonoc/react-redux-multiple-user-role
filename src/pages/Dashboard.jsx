@@ -4,15 +4,15 @@ import { useSelector } from "react-redux"
 
 const Dashboard = () => {
   const navigate = useNavigate()
-  const {user} = useSelector((state)=>state.auth)
+  const { user } = useSelector((state) => state.auth)
 
   // restrict page
-  useEffect(()=>{
-    if(!user)navigate('/login')
-  },[user,navigate])
+  useEffect(() => {
+    if (!user) navigate('/login')
+  }, [user, navigate])
 
   return (
-    <div>Dashboard</div>
+    <div>Welcome to your Dashboard {user ? user.name : ''}</div>
   )
 }
 
