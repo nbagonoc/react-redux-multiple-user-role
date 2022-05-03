@@ -26,6 +26,11 @@ const Register = () => {
     dispatch(reset())
   }, [user, isError, isSuccess, message, navigate, dispatch])
 
+  // restrict page
+  useEffect(() => {
+    if (user) navigate('/dashboard')
+  }, [user, navigate])
+
   const onChange = (e) => {
     setFormData((prevState) => ({
       ...prevState,

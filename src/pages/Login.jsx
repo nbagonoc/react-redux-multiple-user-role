@@ -20,9 +20,14 @@ const Login = () => {
 
   useEffect(() => {
     if (isError) toast.error(message)
-    if (isSuccess || user) navigate('/')
+    if (isSuccess || user) navigate('/dashboard')
     dispatch(reset())
   }, [user, isError, isSuccess, message, navigate, dispatch])
+
+  // restrict page
+  useEffect(() => {
+    if (user) navigate('/dashboard')
+  }, [user, navigate])
 
   const onChange = (e) => {
     setFormData((prevState) => ({
@@ -41,8 +46,8 @@ const Login = () => {
     dispatch(login(userData))
   }
 
-  if(isLoading){
-    return <Spinner/>
+  if (isLoading) {
+    return <Spinner />
   }
 
   return (
