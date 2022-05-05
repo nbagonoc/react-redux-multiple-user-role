@@ -22,9 +22,9 @@ const logout = async () => {
 }
 
 const test = async () => {
-    const response = await authenticator.setAuthorization().get(`${API}/test`)
-    console.log(response.message)
-    return response
+    const response = await authenticator.setAuthorization.get(`${API}/test`)
+    if (!response.data) throw new Error(response.data.message)
+    return response.data.message
 }
 
 const authService = { register, logout, login, test }
