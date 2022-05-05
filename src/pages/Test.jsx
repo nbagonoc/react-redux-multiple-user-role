@@ -1,7 +1,8 @@
 import { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { toast } from 'react-toastify'
-import { test, reset } from '../features/auth/authSlice'
+import { test } from '../features/auth/authSlice'
+import Spinner from '../components/Spinner'
 
 const Test = () => {
   const dispatch = useDispatch()
@@ -9,15 +10,15 @@ const Test = () => {
 
   useEffect(() => {
     dispatch(test())
-  }, [user, dispatch])
-
-  useEffect(() => {
     if (isError) toast.error(message)
     if (isSuccess) {
       toast.success(message)
-      dispatch(reset())
     }
   }, [user, isError, isSuccess, message, dispatch])
+
+  if (isLoading) {
+    return <Spinner />
+  }
 
   return (
     <div>Check console for errors</div>
