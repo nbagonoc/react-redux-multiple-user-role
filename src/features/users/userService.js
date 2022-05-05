@@ -8,8 +8,7 @@ const get = async (param) => {
 }
 
 const getAll = async () => {
-    console.log('it reached here')
-    const response = await authenticator.setAuthorization().get(`${API}`)
+    const response = await authenticator.setAuthorization.get(`${API}`)
     console.log(response)
     if (response.data.success === false) throw new Error(response.data.message)
     return response.data.users
