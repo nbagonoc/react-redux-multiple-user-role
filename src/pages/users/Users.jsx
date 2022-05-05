@@ -11,6 +11,10 @@ const Users = () => {
     dispatch(getAll())
   },[])
 
+  if (isLoading) {
+    return <Spinner />
+  }
+
   return (
     <div>{users}</div>
   )
