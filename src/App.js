@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { ToastContainer } from 'react-toastify'
 import Navigation from './components/Navigation'
+import Users from './pages/users/Users'
 import Home from './pages/Home'
 import Dashboard from './pages/Dashboard'
 import Godmode from './pages/Godmode'
@@ -24,6 +25,7 @@ function App() {
             <Route path='/register' element={<Register />} />
             <Route path='/login' element={<Login />} />
             <Route path='/test' element={<Test />} />
+            <Route path='/users' element={<Users />} />
           </Routes>
         </div>
       </Router>

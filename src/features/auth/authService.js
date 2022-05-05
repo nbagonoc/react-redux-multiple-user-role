@@ -10,6 +10,7 @@ const register = async (userData) => {
 
 const login = async (userData) => {
     const response = await axios.post(`${API}/login`, userData)
+    console.log(response)
     if (response.data.success === true) {
         authenticator.setStorage(response.data.token)
         return authenticator.setUser()
@@ -21,8 +22,9 @@ const logout = async () => {
 }
 
 const test = async () => {
-    const response = await authenticator.setAuthorization().get(`${API}/test`)
-    return response
+    const response = await authenticator.setAuthorization.get(`${API}/test`)
+    if (!response.data) throw new Error(response.data.message)
+    return response.data.message
 }
 
 const authService = { register, logout, login, test }

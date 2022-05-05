@@ -14,11 +14,9 @@ const setUser = () => {
     return user
 }
 
-const setAuthorization = () =>{
-    axios.create({
-        headers: { Authorization: getStorage }
-    })
-}
+const setAuthorization = axios.create({
+    headers: { Authorization: getStorage }
+})
 
 const authenticator = { setStorage, setUser, setAuthorization, unSetStorage }
 
