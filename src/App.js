@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { ToastContainer } from 'react-toastify'
 import Navigation from './components/Navigation'
 import List from './pages/users/List'
+import Update from './pages/users/Update'
 import Home from './pages/Home'
 import Dashboard from './pages/Dashboard'
 import Test from './pages/Test'
@@ -24,6 +25,7 @@ function App() {
             <Route path='/login' element={<Login />} />
             <Route path='/dashboard/test' element={<Test />} />
             <Route path='/dashboard/users' element={<List />} />
+            <Route path='/dashboard/users/update/:id' element={<Update />} />
           </Routes>
         </div>
       </Router>
