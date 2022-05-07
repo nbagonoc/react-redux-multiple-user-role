@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { ToastContainer } from 'react-toastify'
 import Navigation from './components/Navigation'
-import Users from './pages/users/Users'
+import List from './pages/users/List'
 import Home from './pages/Home'
 import Dashboard from './pages/Dashboard'
 import Test from './pages/Test'
@@ -23,7 +23,7 @@ function App() {
             <Route path='/register' element={<Register />} />
             <Route path='/login' element={<Login />} />
             <Route path='/dashboard/test' element={<Test />} />
-            <Route path='/dashboard/users' element={<Users />} />
+            <Route path='/dashboard/users' element={<List />} />
           </Routes>
         </div>
       </Router>

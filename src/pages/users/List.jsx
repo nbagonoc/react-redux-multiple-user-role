@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { getAll, reset } from '../../features/users/userSlice'
 import Spinner from '../../components/Spinner'
 
-const Users = () => {
+const List = () => {
   const { user } = useSelector((state) => state.auth)
   const navigate = useNavigate()
   const dispatch = useDispatch()
@@ -50,4 +50,4 @@ const Users = () => {
   )
 }
 
-export default Users
+export default List
