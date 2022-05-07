@@ -1,5 +1,5 @@
 import { Link, useNavigate } from 'react-router-dom'
-import { FaSignInAlt, FaSignOutAlt, FaCrown, FaUser, FaUsers, FaClipboardCheck } from 'react-icons/fa'
+import { FaSignInAlt, FaSignOutAlt, FaUser, FaUsers, FaClipboardCheck } from 'react-icons/fa'
 import { useSelector, useDispatch } from 'react-redux';
 import { logout, reset } from '../features/auth/authSlice'
 
@@ -32,14 +32,9 @@ const Navigation = () => {
                 <FaClipboardCheck /> Test page
               </Link>
               {user.role === 'admin' ? (
-                <>
-                  <Link className='nav-item nav-link' to='/godmode'>
-                    <FaCrown /> God Mode
-                  </Link>
                   <Link className='nav-item nav-link' to='/users'>
                     <FaUsers /> Users
                   </Link>
-                </>
               ) : ''}
               <button className='btn btn-primary' onClick={onLogout}>
                 <FaSignOutAlt /> Logout

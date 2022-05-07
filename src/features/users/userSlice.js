@@ -23,7 +23,6 @@ export const getAll = createAsyncThunk('user/getAll', async (thunkAPI) => {
     try {
         return await userService.getAll()
     } catch (error) {
-        // console.log(error)
         const message = error.message
         return thunkAPI.rejectWithValue(message)
     }

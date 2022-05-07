@@ -10,7 +10,6 @@ const register = async (userData) => {
 
 const login = async (userData) => {
     const response = await axios.post(`${API}/login`, userData)
-    console.log(response)
     if (response.data.success === true) {
         authenticator.setStorage(response.data.token)
         return authenticator.setUser()
