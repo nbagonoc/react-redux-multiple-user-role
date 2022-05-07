@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { toast } from 'react-toastify'
-import { test } from '../features/auth/authSlice'
+import { test, reset } from '../features/auth/authSlice'
 import Spinner from '../components/Spinner'
 
 const Test = () => {
@@ -9,12 +9,19 @@ const Test = () => {
   const { user, isLoading, isError, isSuccess, message } = useSelector((state) => state.auth)
 
   useEffect(() => {
+    console.log('it reached dispatch')
     dispatch(test())
-    if (isError) toast.error(message)
+  }, [])
+
+  useEffect(() => {
+    console.log('it reached message grabber')
     if (isSuccess) {
+      console.log('it is finally success')
       toast.success(message)
+      dispatch(reset())
     }
-  }, [user, isError, isSuccess, message, dispatch])
+    if (isError) toast.error(message)
+  }, [user, message])
 
   if (isLoading) {
     return <Spinner />
