@@ -4,7 +4,6 @@ import Navigation from './components/Navigation'
 import Users from './pages/users/Users'
 import Home from './pages/Home'
 import Dashboard from './pages/Dashboard'
-import Godmode from './pages/Godmode'
 import Test from './pages/Test'
 import Login from './pages/Login'
 import Register from './pages/Register'
@@ -21,7 +20,6 @@ function App() {
           <Routes>
             <Route path='/' element={<Home />} />
             <Route path='/dashboard' element={<Dashboard />} />
-            <Route path='/godmode' element={<Godmode />} />
             <Route path='/register' element={<Register />} />
             <Route path='/login' element={<Login />} />
             <Route path='/test' element={<Test />} />
