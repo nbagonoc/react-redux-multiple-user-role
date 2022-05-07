@@ -28,11 +28,11 @@ const Navigation = () => {
               <Link className='nav-item nav-link' to='/dashboard'>
                 <FaUser /> {user.name}
               </Link>
-              <Link className='nav-item nav-link' to='/test'>
+              <Link className='nav-item nav-link' to='/dashboard/test'>
                 <FaClipboardCheck /> Test page
               </Link>
               {user.role === 'admin' ? (
-                  <Link className='nav-item nav-link' to='/users'>
+                  <Link className='nav-item nav-link' to='/dashboard/users'>
                     <FaUsers /> Users
                   </Link>
               ) : ''}
