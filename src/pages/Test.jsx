@@ -14,11 +14,11 @@ const Test = () => {
   }, [])
 
   useEffect(() => {
-    console.log('it reached message grabber')
     if (isSuccess) {
-      console.log('it is finally success')
       toast.success(message)
-      dispatch(reset())
+      return ()=>{
+        dispatch(reset())
+      }
     }
     if (isError) toast.error(message)
   }, [user, message])
