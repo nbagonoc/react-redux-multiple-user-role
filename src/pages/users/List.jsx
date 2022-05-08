@@ -39,6 +39,7 @@ const List = () => {
               <td>{email}</td>
               <td>{role}</td>
               <td>
+                <Link className='btn btn-primary mx-2' to={`/dashboard/users/view/${_id}`}>View</Link>
                 <Link className='btn btn-primary mx-2' to={`/dashboard/users/update/${_id}`}>Update</Link>
                 <button className='btn btn-danger'>Delete</button>
               </td>

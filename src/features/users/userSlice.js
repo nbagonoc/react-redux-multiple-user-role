@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import userService from './userService'
 
 const initialState = {
-    user: {},
+    selectedUser: {},
     users: [],
     isLoading: false,
     isError: false,
@@ -10,9 +10,9 @@ const initialState = {
     message: ''
 }
 
-export const get = createAsyncThunk('user/get', async (param, thunkAPI) => {
+export const view = createAsyncThunk('user/view', async (param, thunkAPI) => {
     try {
-        return await userService.get(param)
+        return await userService.view(param)
     } catch (error) {
         const message = error.message
         return thunkAPI.rejectWithValue(message)
@@ -41,16 +41,18 @@ export const userSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder
-            .addCase(get.pending, (state) => {
+            .addCase(view.pending, (state) => {
                 state.isLoading = true
             })
-            .addCase(get.fulfilled, (state, action) => {
-                state.user = action.payload
+            .addCase(view.fulfilled, (state, action) => {
+                state.selectedUser = action.payload
                 state.isLoading = false
                 state.isSuccess = true
                 state.message = action.payload
+                // console.log(action.payload)
+                console.log(state.selectedUser)
             })
-            .addCase(get.rejected, (state, action) => {
+            .addCase(view.rejected, (state, action) => {
                 state.isLoading = false
                 state.isError = true
                 state.message = action.payload
