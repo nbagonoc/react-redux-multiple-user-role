@@ -19,6 +19,12 @@ const update = async (param) => {
     return response.data.message
 }
 
-const userService = { view, getAll, update }
+const remove = async (param) => {
+    const response = await authenticator.setAuthorization.delete(`${API}/delete/${param}`)
+    if (response.data.success === false) throw new Error(response.data.message)
+    return response.data.message
+}
+
+const userService = { view, getAll, update, remove }
 
 export default userService

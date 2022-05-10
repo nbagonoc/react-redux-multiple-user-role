@@ -1,8 +1,9 @@
 import { useEffect } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
-import { view } from '../../features/users/userSlice'
+import { view, remove } from '../../features/users/userSlice'
 import Spinner from '../../components/Spinner'
+import { toast } from 'react-toastify'
 
 const View = () => {
   const { user } = useSelector((state) => state.auth)
@@ -21,6 +22,15 @@ const View = () => {
     dispatch(view(id))
   }, [])
 
+  const onDelete = (e) => {
+    e.preventDefault()
+    dispatch(remove(id))
+    if(isSuccess){
+      navigate(-1)
+        toast.success(message)
+    }
+  }
+
   if (isLoading) return <Spinner />
 
   return (
@@ -29,7 +39,7 @@ const View = () => {
       <h5>{email}</h5>
       <h6>{role}</h6>
       <Link className='btn btn-primary' to={`/dashboard/users/update/${_id}`}>Update</Link>
-      <button className='btn btn-danger mx-2'>Delete</button>
+      <button className='btn btn-danger mx-2' onClick={onDelete}>Delete</button>
       <Link className='btn btn-secondary' to={`/dashboard/users`}>Back</Link>
     </div>
   )

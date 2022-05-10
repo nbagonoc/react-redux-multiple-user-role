@@ -37,6 +37,15 @@ export const update = createAsyncThunk('user/update', async (data, thunkAPI) => 
     }
 })
 
+export const remove = createAsyncThunk('user/remove', async (data, thunkAPI) => {
+    try {
+        return await userService.remove(data)
+    } catch (error) {
+        const message = error.message
+        return thunkAPI.rejectWithValue(message)
+    }
+})
+
 export const userSlice = createSlice({
     name: 'user',
     initialState,
@@ -50,6 +59,19 @@ export const userSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder
+            .addCase(remove.pending, (state) => {
+                state.isLoading = true
+            })
+            .addCase(remove.fulfilled, (state, action) => {
+                state.isLoading = false
+                state.isSuccess = true
+                state.message = action.payload
+            })
+            .addCase(remove.rejected, (state, action) => {
+                state.isLoading = false
+                state.isError = true
+                state.message = action.payload
+            })
             .addCase(update.pending, (state) => {
                 state.isLoading = true
             })
