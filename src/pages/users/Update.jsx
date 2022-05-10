@@ -3,11 +3,12 @@ import { Link, useParams, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { useSelector, useDispatch } from 'react-redux'
 import { view, update, reset } from '../../features/users/userSlice'
+import Spinner from '../../components/Spinner'
 
 const Update = () => {
   const { selectedUser, isLoading, isError, isSuccess, message } = useSelector((state) => state.user)
-  const { name, role } = selectedUser
   const { id } = useParams()
+  const { name, role } = selectedUser
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
@@ -18,25 +19,22 @@ const Update = () => {
 
   const { inputName, inputRole } = formData
 
-  console.log(formData)
 
   useEffect(() => {
     dispatch(view(id))
-  }, [])
+  }, [dispatch])
 
   const onSubmit = (e) => {
     e.preventDefault()
-
-    const data = {
-      name: inputName,
-      role: inputRole
-    }
-
-    dispatch(update({ id, data }))
+    const data = { name: inputName, role: inputRole }
     
-    if (isSuccess) {
-      navigate(-1)
-      toast.success(message)
+    if (name === inputName && role === inputRole) toast.error('Changes are required')
+    else {
+      dispatch(update({ id, data }))
+      if (isSuccess) {
+        navigate(-1)
+        toast.success(message)
+      }
     }
   }
 
@@ -46,6 +44,8 @@ const Update = () => {
       [e.target.name]: e.target.value
     }))
   }
+
+  if (isLoading) return <Spinner />
 
   return (
     <div className='card'>
@@ -78,8 +78,8 @@ const Update = () => {
               />
             </div>
           </div>
-          <button type='submit' className='btn btn-primary mr-1'>Update</button>
-          <Link className='btn btn-warning mr-2' to={`/dashboard/users`}>Cancel</Link>
+          <button type='submit' className='btn btn-primary mr-2'>Update</button>
+          <Link className='btn btn-warning' to={`/dashboard/users`}>Cancel</Link>
         </form>
       </div>
     </div>
