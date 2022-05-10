@@ -28,6 +28,15 @@ export const getAll = createAsyncThunk('user/getAll', async (thunkAPI) => {
     }
 })
 
+export const update = createAsyncThunk('user/update', async (data, thunkAPI) => {
+    try {
+        return await userService.update(data)
+    } catch (error) {
+        const message = error.message
+        return thunkAPI.rejectWithValue(message)
+    }
+})
+
 export const userSlice = createSlice({
     name: 'user',
     initialState,
@@ -41,6 +50,19 @@ export const userSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder
+            .addCase(update.pending, (state) => {
+                state.isLoading = true
+            })
+            .addCase(update.fulfilled, (state, action) => {
+                state.isLoading = false
+                state.isSuccess = true
+                state.message = action.payload
+            })
+            .addCase(update.rejected, (state, action) => {
+                state.isLoading = false
+                state.isError = true
+                state.message = action.payload
+            })
             .addCase(view.pending, (state) => {
                 state.isLoading = true
             })
@@ -48,9 +70,6 @@ export const userSlice = createSlice({
                 state.selectedUser = action.payload
                 state.isLoading = false
                 state.isSuccess = true
-                state.message = action.payload
-                // console.log(action.payload)
-                console.log(state.selectedUser)
             })
             .addCase(view.rejected, (state, action) => {
                 state.isLoading = false
@@ -64,7 +83,6 @@ export const userSlice = createSlice({
                 state.users = action.payload
                 state.isLoading = false
                 state.isSuccess = true
-                state.message = action.payload
             })
             .addCase(getAll.rejected, (state, action) => {
                 state.isLoading = false

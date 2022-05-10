@@ -28,8 +28,9 @@ const View = () => {
       <h3>{name}</h3>
       <h5>{email}</h5>
       <h6>{role}</h6>
-      <Link className='btn btn-primary mr-2' to={`/dashboard/users/update/${_id}`}>Update</Link>
-      <button className='btn btn-danger'>Delete</button>
+      <Link className='btn btn-primary' to={`/dashboard/users/update/${_id}`}>Update</Link>
+      <button className='btn btn-danger mx-2'>Delete</button>
+      <Link className='btn btn-secondary' to={`/dashboard/users`}>Back</Link>
     </div>
   )
 }
