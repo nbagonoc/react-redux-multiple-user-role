@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import userService from './userService'
 
 const initialState = {
-    user: {},
+    selectedUser: {},
     users: [],
     isLoading: false,
     isError: false,
@@ -10,9 +10,9 @@ const initialState = {
     message: ''
 }
 
-export const get = createAsyncThunk('user/get', async (param, thunkAPI) => {
+export const view = createAsyncThunk('user/view', async (param, thunkAPI) => {
     try {
-        return await userService.get(param)
+        return await userService.view(param)
     } catch (error) {
         const message = error.message
         return thunkAPI.rejectWithValue(message)
@@ -22,6 +22,24 @@ export const get = createAsyncThunk('user/get', async (param, thunkAPI) => {
 export const getAll = createAsyncThunk('user/getAll', async (thunkAPI) => {
     try {
         return await userService.getAll()
+    } catch (error) {
+        const message = error.message
+        return thunkAPI.rejectWithValue(message)
+    }
+})
+
+export const update = createAsyncThunk('user/update', async (data, thunkAPI) => {
+    try {
+        return await userService.update(data)
+    } catch (error) {
+        const message = error.message
+        return thunkAPI.rejectWithValue(message)
+    }
+})
+
+export const remove = createAsyncThunk('user/remove', async (data, thunkAPI) => {
+    try {
+        return await userService.remove(data)
     } catch (error) {
         const message = error.message
         return thunkAPI.rejectWithValue(message)
@@ -41,16 +59,41 @@ export const userSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder
-            .addCase(get.pending, (state) => {
+            .addCase(remove.pending, (state) => {
                 state.isLoading = true
             })
-            .addCase(get.fulfilled, (state, action) => {
-                state.user = action.payload
+            .addCase(remove.fulfilled, (state, action) => {
                 state.isLoading = false
                 state.isSuccess = true
                 state.message = action.payload
             })
-            .addCase(get.rejected, (state, action) => {
+            .addCase(remove.rejected, (state, action) => {
+                state.isLoading = false
+                state.isError = true
+                state.message = action.payload
+            })
+            .addCase(update.pending, (state) => {
+                state.isLoading = true
+            })
+            .addCase(update.fulfilled, (state, action) => {
+                state.isLoading = false
+                state.isSuccess = true
+                state.message = action.payload
+            })
+            .addCase(update.rejected, (state, action) => {
+                state.isLoading = false
+                state.isError = true
+                state.message = action.payload
+            })
+            .addCase(view.pending, (state) => {
+                state.isLoading = true
+            })
+            .addCase(view.fulfilled, (state, action) => {
+                state.selectedUser = action.payload
+                state.isLoading = false
+                state.isSuccess = true
+            })
+            .addCase(view.rejected, (state, action) => {
                 state.isLoading = false
                 state.isError = true
                 state.message = action.payload
@@ -62,7 +105,6 @@ export const userSlice = createSlice({
                 state.users = action.payload
                 state.isLoading = false
                 state.isSuccess = true
-                state.message = action.payload
             })
             .addCase(getAll.rejected, (state, action) => {
                 state.isLoading = false

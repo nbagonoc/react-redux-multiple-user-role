@@ -1,10 +1,11 @@
 import { useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
+import { toast } from 'react-toastify'
 import { getAll, reset } from '../../features/users/userSlice'
 import Spinner from '../../components/Spinner'
 
-const Users = () => {
+const List = () => {
   const { user } = useSelector((state) => state.auth)
   const navigate = useNavigate()
   const dispatch = useDispatch()
@@ -15,9 +16,17 @@ const Users = () => {
     if (!user || user.role !== 'admin') navigate('/dashboard')
   }, [user, navigate])
 
+  // fetch data
   useEffect(() => {
     dispatch(getAll())
+    return () => dispatch(reset())
   }, [])
+
+  // reset state, show errors
+  useEffect(() => {
+    if (isError) toast.error(message)
+    if (isSuccess) dispatch(reset())
+  }, [isSuccess, isError])
 
   if (isLoading) return <Spinner />
 
@@ -39,8 +48,9 @@ const Users = () => {
               <td>{email}</td>
               <td>{role}</td>
               <td>
-                <Link className='btn btn-primary mx-2' to={`/update/${_id}`}>Update</Link>
-                <button className='btn btn-danger'>Delete</button>
+                <Link className='btn btn-primary mx-2' to={`/dashboard/users/view/${_id}`}>View</Link>
+                {/* <Link className='btn btn-primary mx-2' to={`/dashboard/users/update/${_id}`}>Update</Link> */}
+                {/* <button className='btn btn-danger'>Delete</button> */}
               </td>
             </tr>
           ))}
@@ -50,4 +60,4 @@ const Users = () => {
   )
 }
 
-export default Users
+export default List

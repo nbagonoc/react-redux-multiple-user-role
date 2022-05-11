@@ -17,39 +17,41 @@ const Navigation = () => {
 
   return (
     <nav className='navbar navbar-expand-lg navbar-dark bg-dark'>
-      <Link className='navbar-brand' to='/'>RRMU</Link>
-      <button className='navbar-toggler' type='button' data-toggle='collapse' data-target='#navbarNavAltMarkup' aria-controls='navbarNavAltMarkup' aria-expanded='false' aria-label='Toggle navigation'>
-        <span className='navbar-toggler-icon'></span>
-      </button>
-      <div className='justify-content-end collapse navbar-collapse' id='navbarNavAltMarkup'>
-        <div className='navbar-nav'>
-          {user ? (
-            <>
-              <Link className='nav-item nav-link' to='/dashboard'>
-                <FaUser /> {user.name}
-              </Link>
-              <Link className='nav-item nav-link' to='/test'>
-                <FaClipboardCheck /> Test page
-              </Link>
-              {user.role === 'admin' ? (
-                  <Link className='nav-item nav-link' to='/users'>
+      <div className="container">
+        <Link className='navbar-brand' to='/'>RRMU</Link>
+        <button className='navbar-toggler' type='button' data-toggle='collapse' data-target='#navbarNavAltMarkup' aria-controls='navbarNavAltMarkup' aria-expanded='false' aria-label='Toggle navigation'>
+          <span className='navbar-toggler-icon'></span>
+        </button>
+        <div className='justify-content-end collapse navbar-collapse' id='navbarNavAltMarkup'>
+          <div className='navbar-nav'>
+            {user ? (
+              <>
+                <Link className='nav-item nav-link' to='/dashboard'>
+                  <FaUser /> {user.name}
+                </Link>
+                {/* <Link className='nav-item nav-link' to='/dashboard/test'>
+                  <FaClipboardCheck /> Test page
+                </Link> */}
+                {user.role === 'admin' ? (
+                  <Link className='nav-item nav-link' to='/dashboard/users'>
                     <FaUsers /> Users
                   </Link>
-              ) : ''}
-              <button className='btn btn-primary' onClick={onLogout}>
-                <FaSignOutAlt /> Logout
-              </button>
-            </>
-          ) : (
-            <>
-              <Link className='nav-item nav-link' to='/login'>
-                <FaSignInAlt /> Login
-              </Link>
-              <Link className='nav-item nav-link' to='/register'>
-                <FaSignOutAlt /> Register
-              </Link>
-            </>
-          )}
+                ) : ''}
+                <button className='btn btn-primary' onClick={onLogout}>
+                  <FaSignOutAlt /> Logout
+                </button>
+              </>
+            ) : (
+              <>
+                <Link className='nav-item nav-link' to='/login'>
+                  <FaSignInAlt /> Login
+                </Link>
+                <Link className='nav-item nav-link' to='/register'>
+                  <FaSignOutAlt /> Register
+                </Link>
+              </>
+            )}
+          </div>
         </div>
       </div>
     </nav>
