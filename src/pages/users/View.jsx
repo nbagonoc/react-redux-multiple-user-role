@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
-import { view, remove } from '../../features/users/userSlice'
+import { view, remove, reset } from '../../features/users/userSlice'
 import Spinner from '../../components/Spinner'
 import { toast } from 'react-toastify'
 
@@ -20,6 +20,7 @@ const View = () => {
 
   useEffect(() => {
     dispatch(view(id))
+    return () => dispatch(reset())
   }, [])
 
   const onDelete = (e) => {

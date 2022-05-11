@@ -22,7 +22,8 @@ const Update = () => {
 
   useEffect(() => {
     dispatch(view(id))
-  }, [dispatch])
+    return () => dispatch(reset())
+  }, [])
 
   const onSubmit = (e) => {
     e.preventDefault()
