@@ -25,22 +25,24 @@ const View = () => {
   const onDelete = (e) => {
     e.preventDefault()
     dispatch(remove(id))
-    if(isSuccess){
+    if (isSuccess) {
       navigate(-1)
-        toast.success(message)
+      toast.success(message)
     }
   }
 
   if (isLoading) return <Spinner />
 
   return (
-    <div className='user-list'>
-      <h3>{name}</h3>
-      <h5>{email}</h5>
-      <h6>{role}</h6>
-      <Link className='btn btn-primary' to={`/dashboard/users/update/${_id}`}>Update</Link>
-      <button className='btn btn-danger mx-2' onClick={onDelete}>Delete</button>
-      <Link className='btn btn-secondary' to={`/dashboard/users`}>Back</Link>
+    <div className='card'>
+      <div className="card-body">
+        <h3>{name}</h3>
+        <h5>{email}</h5>
+        <h6>{role}</h6>
+        <Link className='btn btn-primary' to={`/dashboard/users/update/${_id}`}>Update</Link>
+        <button className='btn btn-danger mx-2' onClick={onDelete}>Delete</button>
+        <Link className='btn btn-secondary' to={`/dashboard/users`}>Back</Link>
+      </div>
     </div>
   )
 }
