@@ -17,6 +17,7 @@ const List = () => {
 
   useEffect(() => {
     dispatch(getAll())
+    return () => dispatch(reset())
   }, [])
 
   if (isLoading) return <Spinner />
