@@ -44,7 +44,6 @@ const Update = () => {
       [e.target.name]: e.target.value
     }))
   }
-
   if (isLoading) return <Spinner />
 
   return (
@@ -66,16 +65,17 @@ const Update = () => {
               />
             </div>
             <div className='form-group col-md-6'>
-              <label htmlFor='role'>Role</label>
-              <input
-                type='role'
+              <label htmlFor='role'>Example select</label>
+              <select
                 className='form-control'
                 id='role'
                 name='inputRole'
                 value={inputRole}
-                placeholder='role'
                 onChange={onChange}
-              />
+              >
+                <option value='subscriber'>Subscriber</option>
+                <option value='admin'>Admin</option>
+              </select>
             </div>
           </div>
           <button type='submit' className='btn btn-primary mr-2'>Update</button>
