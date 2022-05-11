@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
+import { toast } from 'react-toastify'
 import { getAll, reset } from '../../features/users/userSlice'
 import Spinner from '../../components/Spinner'
 
@@ -15,10 +16,17 @@ const List = () => {
     if (!user || user.role !== 'admin') navigate('/dashboard')
   }, [user, navigate])
 
+  // fetch data
   useEffect(() => {
     dispatch(getAll())
     return () => dispatch(reset())
   }, [])
+
+  // reset state, show errors
+  useEffect(() => {
+    if (isError) toast.error(message)
+    if (isSuccess) dispatch(reset())
+  }, [isSuccess, isError])
 
   if (isLoading) return <Spinner />
 

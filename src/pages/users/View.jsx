@@ -18,10 +18,17 @@ const View = () => {
     if (!user || user.role !== 'admin') navigate('/dashboard')
   }, [user, navigate])
 
+  // fetch data
   useEffect(() => {
     dispatch(view(id))
     return () => dispatch(reset())
   }, [])
+
+  // reset state, show errors
+  useEffect(() => {
+    if (isError) toast.error(message)
+    if (isSuccess) dispatch(reset())
+  }, [isSuccess, isError])
 
   const onDelete = (e) => {
     e.preventDefault()

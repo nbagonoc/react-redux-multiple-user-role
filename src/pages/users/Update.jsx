@@ -6,6 +6,7 @@ import { view, update, reset } from '../../features/users/userSlice'
 import Spinner from '../../components/Spinner'
 
 const Update = () => {
+  const { user } = useSelector((state) => state.auth)
   const { selectedUser, isLoading, isError, isSuccess, message } = useSelector((state) => state.user)
   const { id } = useParams()
   const { name, role } = selectedUser
@@ -19,16 +20,30 @@ const Update = () => {
 
   const { inputName, inputRole } = formData
 
+  // restrict page
+  useEffect(() => {
+    if (!user || user.role !== 'admin') navigate('/dashboard')
+  }, [user, navigate])
 
+  // fetch data
   useEffect(() => {
     dispatch(view(id))
     return () => dispatch(reset())
   }, [])
 
+  // reset state, show errors
+  useEffect(() => {
+    if (isError) toast.error(message)
+    if (isSuccess){
+      toast.success(message)
+      dispatch(reset())
+    }
+  }, [isSuccess, isError])
+
   const onSubmit = (e) => {
     e.preventDefault()
     const data = { name: inputName, role: inputRole }
-    
+
     if (name === inputName && role === inputRole) toast.error('Changes are required')
     else {
       dispatch(update({ id, data }))
