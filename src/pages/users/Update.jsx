@@ -95,7 +95,7 @@ const Update = () => {
             </div>
           </div>
           <button type='submit' className='btn btn-primary mr-2'>Update</button>
-          <Link className='btn btn-warning' to={`/dashboard/users`}>Cancel</Link>
+          <Link className='btn btn-warning' to={`/dashboard/users/view/`+id}>Cancel</Link>
         </form>
       </div>
     </div>
