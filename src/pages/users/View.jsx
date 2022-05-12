@@ -27,16 +27,19 @@ const View = () => {
   // reset state, show errors
   useEffect(() => {
     if (isError) toast.error(message)
-    if (isSuccess) dispatch(reset())
+    if (isSuccess) {
+      dispatch(reset())
+    }
+    if (isSuccess && message) {
+      navigate(-1)
+      toast.success(message)
+      dispatch(reset())
+    }
   }, [isSuccess, isError])
 
   const onDelete = (e) => {
     e.preventDefault()
     dispatch(remove(id))
-    if (isSuccess) {
-      navigate(-1)
-      toast.success(message)
-    }
   }
 
   if (isLoading) return <Spinner />

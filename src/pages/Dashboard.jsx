@@ -12,7 +12,14 @@ const Dashboard = () => {
   }, [user, navigate])
 
   return (
-    <div>Welcome to your Dashboard {user ? user.name : ''}</div>
+    <div className='card'>
+      <div className="card-body">
+      <h5 className="card-title">
+        Welcome to your Dashboard, {user ? user.name : ''}
+      </h5>
+      <span>Your access level: {user ? user.role : ''}</span>
+      </div>
+    </div>
   )
 }
 
