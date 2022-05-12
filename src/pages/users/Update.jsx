@@ -25,16 +25,11 @@ const Update = () => {
     if (!user || user.role !== 'admin') navigate('/dashboard')
   }, [user, navigate])
 
-  // fetch data
-  useEffect(() => {
-    dispatch(view(id))
-    return () => dispatch(reset())
-  }, [])
-
   // reset state, show errors
   useEffect(() => {
     if (isError) toast.error(message)
     if (isSuccess){
+      navigate(-1)
       toast.success(message)
       dispatch(reset())
     }
@@ -45,13 +40,7 @@ const Update = () => {
     const data = { name: inputName, role: inputRole }
 
     if (name === inputName && role === inputRole) toast.error('Changes are required')
-    else {
-      dispatch(update({ id, data }))
-      if (isSuccess) {
-        navigate(-1)
-        toast.success(message)
-      }
-    }
+    else dispatch(update({ id, data }))
   }
 
   const onChange = (e) => {
