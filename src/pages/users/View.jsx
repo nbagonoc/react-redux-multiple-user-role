@@ -3,6 +3,8 @@ import { Link, useNavigate, useParams } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { view, remove, reset } from '../../features/users/userSlice'
 import Spinner from '../../components/Spinner'
+import Card from '../../components/Card'
+import Button from '../../components/Button'
 import { toast } from 'react-toastify'
 
 const View = () => {
@@ -45,16 +47,14 @@ const View = () => {
   if (isLoading) return <Spinner />
 
   return (
-    <div className='card'>
-      <div className="card-body">
+    <Card>
         <h3>{name}</h3>
         <h5>{email}</h5>
         <h6>{role}</h6>
         <Link className='btn btn-primary' to={`/dashboard/users/update/${_id}`}>Update</Link>
-        <button className='btn btn-danger mx-2' onClick={onDelete}>Delete</button>
+        <Button className='btn btn-danger mx-2' onClick={onDelete}>Delete</Button>
         <Link className='btn btn-secondary' to={`/dashboard/users`}>Back</Link>
-      </div>
-    </div>
+    </Card>
   )
 }
 
