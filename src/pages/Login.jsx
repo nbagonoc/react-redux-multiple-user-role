@@ -53,8 +53,7 @@ const Login = () => {
   }
 
   return (
-    <Card>
-        <h5 className="card-title">Login</h5>
+    <Card title='Login'>
         <h6 className="card-subtitle mb-2 text-muted">
           Don't have an account? Click <Link to='/register' className=''>here</Link>
         </h6>

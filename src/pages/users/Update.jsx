@@ -54,8 +54,7 @@ const Update = () => {
   if (isLoading) return <Spinner />
 
   return (
-    <Card>
-      <h5 className='card-title'>Update</h5>
+    <Card title='update'>
       <form onSubmit={onSubmit}>
         <div className='form-row'>
           <div className='form-group col-md-6'>

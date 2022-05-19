@@ -60,9 +60,8 @@ const Register = () => {
   if (isLoading) return <Spinner />
 
   return (
-    <Card>
-      <h5 className="card-title">Register</h5>
-      <h6 className="card-subtitle mb-2 text-muted">
+    <Card title='register'>
+      <h6 className='card-subtitle mb-2 text-muted'>
         Already have an account? Click <Link to='/login' className=''>here</Link>
       </h6>
       <form onSubmit={onSubmit}>

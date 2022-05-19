@@ -13,8 +13,8 @@ const Dashboard = () => {
   }, [user, navigate])
 
   return (
-    <Card>
-      <h5 className="card-title">Welcome to your Dashboard, {user ? user.name : ''}</h5>
+    <Card title='Welcome to your Dashboard'>
+      <p>How was your day, {user ? user.name : ''}?</p>
       <span>Your access level: {user ? user.role : ''}</span>
     </Card>
   )
