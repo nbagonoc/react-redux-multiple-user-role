@@ -5,6 +5,8 @@ import { toast } from 'react-toastify'
 import { Link } from 'react-router-dom'
 import { login, reset } from '../features/auth/authSlice'
 import Spinner from '../components/Spinner'
+import Card from '../components/Card'
+import Button from '../components/Button'
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -51,9 +53,7 @@ const Login = () => {
   }
 
   return (
-    <div className="card">
-      <div className="card-body">
-        <h5 className="card-title">Login</h5>
+    <Card title='Login'>
         <h6 className="card-subtitle mb-2 text-muted">
           Don't have an account? Click <Link to='/register' className=''>here</Link>
         </h6>
@@ -84,10 +84,9 @@ const Login = () => {
               />
             </div>
           </div>
-          <button type='submit' className='btn btn-primary mr-1'>Login</button>
+          <Button type='submit' className='btn btn-primary mr-1'>Login</Button>
         </form>
-      </div>
-    </div>
+    </Card>
   )
 }
 

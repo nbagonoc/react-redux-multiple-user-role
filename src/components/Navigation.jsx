@@ -2,6 +2,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { FaSignInAlt, FaSignOutAlt, FaUser, FaUsers, FaClipboardCheck } from 'react-icons/fa'
 import { useSelector, useDispatch } from 'react-redux';
 import { logout, reset } from '../features/auth/authSlice'
+import Button from './Button'
 
 const Navigation = () => {
   const navigate = useNavigate()
@@ -37,9 +38,9 @@ const Navigation = () => {
                     <FaUsers /> Users
                   </Link>
                 ) : ''}
-                <button className='btn btn-primary' onClick={onLogout}>
+                <Button className='btn btn-primary' onClick={onLogout}>
                   <FaSignOutAlt /> Logout
-                </button>
+                </Button>
               </>
             ) : (
               <>
